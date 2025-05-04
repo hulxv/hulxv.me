@@ -77,11 +77,11 @@ function toggleNavDrawer() {
 <template>
   <header
     id="header" :class="{ 'header-bg-blur': scroll > 20 }"
-    class="!fixed bg-transparent z-899 w-screen h-20 px-6 flex justify-between items-center relative"
+    class="!fixed bg-transparent z-899 w-screen max-w-7xl h-20 px-6 flex justify-between items-center relative"
   >
     <div class="flex items-center h-full">
       <a href="/" mr-6 aria-label="Header Logo Image">
-        <img width="32" height="32" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt">
+        <img width="64" height="64" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt" style="mix-blend-mode: multiply;">
       </a>
       <nav class="sm:flex hidden flex-wrap gap-x-6 position-initial flex-row">
         <a
@@ -105,9 +105,7 @@ function toggleNavDrawer() {
       <ThemeToggle />
     </div>
   </header>
-  <nav
-    class="nav-drawer sm:hidden"
-  >
+  <nav class="nav-drawer sm:hidden">
     <i i-ri-menu-2-fill />
     <a
       v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"

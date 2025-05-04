@@ -2,9 +2,9 @@ export const siteConfig = {
   author: 'Mohamed Emad (Hulxv)',
   title: 'hulxv',
   // subtitle: 'Vitesse theme for Astro, supports Vue and UnoCSS.',
-  description: 'the Official blog of Hulxv, the greatest software developer in his home (till now).',
+  description: 'the Official blog of Hulxv, the greatest software developer in his home.',
   image: {
-    src: '/hero.jpg',
+    src: '/hero.optimized.gif',
     alt: 'Website Main Image',
   },
   email: 'hulxxv@gmail.com',
@@ -25,7 +25,7 @@ export const siteConfig = {
   ],
   header: {
     logo: {
-      src: '/favicon.svg',
+      src: '/logo.png',
       alt: 'Logo Image',
     },
     navLinks: [

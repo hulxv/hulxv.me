@@ -1,3 +1,21 @@
+@font-face {
+    font-family: "arabic-pixel-font";
+    src: url("/arabic-pixel-font/arabic-pixel-1.otf") format("opentype");
+}
+
+* {
+  font-family: "VT323", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+.arabic-pixel-font {
+  font-family: "arabic-pixel-font";
+  font-weight: 500;
+  font-style: normal;
+}
+
 html.dark .astro-code,
 html.dark .astro-code span {
   color: var(--shiki-dark) !important;
@@ -59,6 +77,7 @@ article {
 html.dark::view-transition-old(root) {
   z-index: 2147483646;
 }
+
 html.dark::view-transition-new(root) {
   z-index: 1;
 }

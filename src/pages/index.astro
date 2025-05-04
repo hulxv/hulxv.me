@@ -5,7 +5,7 @@ import siteConfig from "@/site-config";
 
 <BaseLayout description={siteConfig.description}>
 	<article class='prose'>
-		<h1 class='text-title'>Welcome!</h1>
+		<h1 class='text-title uppercase rtl arabic-pixel-font' dir="rtl">السلام عليكم!</h1>
 		<h2>Who am I?</h2>
 		<p>
 			I am <u>Mohamed Emad</u> (or you can call me <u>Hulxv</u>), a hobbyist software developer, and GNU/Linux user (I use Arch BTW xD). interested in Low-level programming and how the
@@ -15,7 +15,7 @@ import siteConfig from "@/site-config";
 			contributing to others.
 		</p>
 		<p class='flex justify-center w-full'>
-			<img width='640' height='360' src='/hero.jpg' alt='Hero Image' />
+			<img width='640' height='360' src='/hero.optimized.gif' alt='Hero Image' />
 		</p>
 
 		<hr class='hr-line' />
@@ -35,14 +35,14 @@ import siteConfig from "@/site-config";
 			}
 		</p>
 		<p>
-			If you have any questions or want to hire me, please email me at
+			If you want to contact me, please email me at
 			<a
 				prose-link
 				aria-label={siteConfig.email}
 				href={`mailto:${siteConfig.email}`}
 			>
 				{siteConfig.email}
-			</a>.
+			</a>, or any of the above links.
 		</p>
 	</article>
 </BaseLayout>
