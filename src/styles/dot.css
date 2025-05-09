@@ -15,10 +15,34 @@ html:not(.dark) {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, var(--dot-bg-color) 22px, transparent 1%) 50%,
-    linear-gradient(var(--dot-bg-color) 22px, transparent 1%) 50%,
+    linear-gradient(90deg, var(--dot-bg-color) 18px, transparent 1%) 50%,
+    linear-gradient(var(--dot-bg-color) 18px, transparent 1%) 50%,
     var(--dot-color);
   background-position: center center;
-  background-size: 24px 24px;
+  background-size: 20px 20px;
   mask-image: linear-gradient(0deg, transparent 5%, var(--dot-mask-color));
+  animation: dotAnimation 20s ease-in-out infinite;
+}
+
+@keyframes dotAnimation {
+  0% {
+    background-position: 0 0;
+    opacity: 0.8;
+  }
+  25% {
+    background-position: 48px 48px;
+    opacity: 1;
+  }
+  50% {
+    background-position: 96px 0;
+    opacity: 0.8;
+  }
+  75% {
+    background-position: 48px -48px;
+    opacity: 1;
+  }
+  100% {
+    background-position: 0 0;
+    opacity: 0.8;
+  }
 }
