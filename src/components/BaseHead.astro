@@ -8,12 +8,13 @@ interface Props {
   title?: string
   description?: string
   image?: { src: string; alt?: string }
+  icon?: { src: string; alt?: string }
   pageType?: 'website' | 'article'
 }
-
 const {
   description = '',
   image = siteConfig.image,
+  icon = siteConfig.icon,
   pageType = 'website',
 } = Astro.props
 
@@ -43,7 +44,7 @@ function formatCanonicalURL(url: string | URL) {
 <meta name="generator" content={Astro.generator} />
 
 <!-- Low Priority Global Metadata -->
-<link rel="icon" type="image/png" href="/logo.png" />
+<link rel="icon" type="image/png" href={icon.src} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
 
@@ -79,7 +80,7 @@ function formatCanonicalURL(url: string | URL) {
   )
 }
 
-<!-- [خىفس؟] -->
+<!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=VT323&display=swap" rel="stylesheet">

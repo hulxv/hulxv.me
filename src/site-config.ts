@@ -2,10 +2,14 @@ export const siteConfig = {
   author: 'Mohamed Emad (Hulxv)',
   title: 'hulxv',
   // subtitle: 'Vitesse theme for Astro, supports Vue and UnoCSS.',
-  description: 'the Official blog of Hulxv, the greatest software developer in his home.',
+  description: 'the official blog of Hulxv, the greatest software developer in his home.',
   image: {
-    src: '/hero.optimized.gif',
-    alt: 'Website Main Image',
+    src: '/hero.bird.png',
+    alt: 'Birds, flying in the sky',
+  },
+  icon: {
+    src: '/logo-bird.png',
+    alt: 'My Bird',
   },
   email: 'hulxxv@gmail.com',
   socialLinks: [
@@ -15,13 +19,11 @@ export const siteConfig = {
       icon: 'i-simple-icons-github',
       header: 'i-ri-github-line',
     },
-
     {
       text: 'Linkedin',
       href: 'https://linkedin.com/in/hulxv',
       icon: 'i-simple-icons-linkedin',
     },
-
   ],
   header: {
     logo: {
@@ -68,7 +70,7 @@ export const siteConfig = {
       // {
       //   text: 'GitHub Repository',
       //   href: 'https://github.com/kevinwong865/astro-theme-vitesse',
-      // },
+      // }
     ],
   },
 }
