@@ -140,7 +140,7 @@ function toggleNavDrawer() {
   --at-apply: backdrop-blur-sm;
 }
 
-.nav-drawer {ex
+.nav-drawer {
   transform: translateX(100%);
   --at-apply: box-border fixed h-screen z-999 right-0 top-0 min-w-32vw
     max-w-50vw bg-main p-6 text-lg flex flex-col gap-5 transition-all;
