@@ -64,7 +64,7 @@ function toggleNavDrawer() {
   if (!drawer || !mask)
     return
   if (drawer.style.transform === `translateX(0%)`) {
-    drawer.style.transform = `translateX(-100%)`
+    drawer.style.transform = `translateX(100%)`
     mask.style.display = `none`
   }
   else {
@@ -140,10 +140,10 @@ function toggleNavDrawer() {
   --at-apply: backdrop-blur-sm;
 }
 
-.nav-drawer {
-  transform: translateX(-100%);
-  --at-apply: box-border fixed h-screen z-999 left-0 top-0 min-w-32vw max-w-50vw
-    bg-main p-6 text-lg flex flex-col gap-5 transition-all;
+.nav-drawer {ex
+  transform: translateX(100%);
+  --at-apply: box-border fixed h-screen z-999 right-0 top-0 min-w-32vw
+    max-w-50vw bg-main p-6 text-lg flex flex-col gap-5 transition-all;
 }
 
 .nav-drawer-mask {
