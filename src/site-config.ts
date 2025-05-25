@@ -8,7 +8,7 @@ export const siteConfig = {
     alt: 'Birds, flying in the sky',
   },
   icon: {
-    src: '/logo-bird.png',
+    src: '/favicon.ico',
     alt: 'My Bird',
   },
   email: 'hulxxv@gmail.com',
@@ -27,7 +27,7 @@ export const siteConfig = {
   ],
   header: {
     logo: {
-      src: '/logo.png',
+      src: '/android-chrome-512x512.png',
       alt: 'Logo Image',
     },
     navLinks: [

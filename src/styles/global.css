@@ -3,6 +3,11 @@
     src: url("/arabic-pixel-font/arabic-pixel-1.otf") format("opentype");
 }
 
+@font-face {
+    font-family: "VT323";
+    src: url("/VT323/VT323-Regular.ttf") format("opentype");
+}
+
 * {
   font-family: "VT323", monospace;
   font-weight: 500;

@@ -79,10 +79,12 @@ function toggleNavDrawer() {
     id="header" :class="{ 'header-bg-blur': scroll > 20 }"
     class="!fixed bg-transparent z-899 w-screen max-w-7xl h-20 px-6 flex justify-between items-center relative"
   >
-    <div class="flex items-center h-full">
-      <a href="/" mr-6 aria-label="Header Logo Image">
-        <img width="64" height="64" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt" style="mix-blend-mode: multiply;">
-      </a>
+    <div class="flex items-center h-full justify-between gap-x-6">
+      <div>
+        <a href="/" aria-label="Header Logo Image">
+          <img width="84" height="84" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt" style="mix-blend-mode: multiply;">
+        </a>
+      </div>
       <nav class="sm:flex hidden flex-wrap gap-x-6 position-initial flex-row">
         <a
           v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
@@ -91,11 +93,11 @@ function toggleNavDrawer() {
           {{ link.text }}
         </a>
       </nav>
-      <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
-        <menu i-ri-menu-2-fill />
-      </div>
     </div>
-    <div class="flex gap-x-6">
+    <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
+      <menu i-ri-menu-2-fill />
+    </div>
+    <div class="hidden sm:flex sm:gap-x-6">
       <a
         v-for="link in socialLinks" :key="link.text" :aria-label="`${link.text}`" :class="link.icon" nav-link
         :target="getLinkTarget(link.href)" :href="link.href"
@@ -105,14 +107,25 @@ function toggleNavDrawer() {
       <ThemeToggle />
     </div>
   </header>
-  <nav class="nav-drawer sm:hidden">
-    <i i-ri-menu-2-fill />
-    <a
-      v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
-      nav-link :href="link.href" @click="toggleNavDrawer()"
-    >
-      {{ link.text }}
-    </a>
+  <nav class="nav-drawer flex flex-col justify-between sm:hidden">
+    <!-- <i i-ri-menu-2-fill /> -->
+    <div class="flex flex-col items-start gap-y-8 justify-between">
+      <a
+        v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
+        nav-link :href="link.href" @click="toggleNavDrawer()"
+      >
+        {{ link.text }}
+      </a>
+    </div>
+    <div class="flex gap-x-6 items-center justify-between mb-6">
+      <a
+        v-for="link in socialLinks" :key="link.text" :aria-label="`${link.text}`" :class="link.icon" nav-link
+        :target="getLinkTarget(link.href)" :href="link.href"
+      />
+
+      <a nav-link target="_blank" href="/rss.xml" i-ri-rss-line aria-label="RSS" />
+      <ThemeToggle />
+    </div>
   </nav>
   <div class="nav-drawer-mask" @click="toggleNavDrawer()" />
 </template>
