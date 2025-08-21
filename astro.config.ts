@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import UnoCSS from 'unocss/astro'
 import vue from '@astrojs/vue'
+import rehypeMermaid from 'rehype-mermaid'
 
 export default defineConfig({
   site: 'https://hulxv.vercel.app/',
@@ -25,5 +26,10 @@ export default defineConfig({
       },
       wrap: true,
     },
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid'],
+    },
+    rehypePlugins: [[rehypeMermaid, { strategy: 'img-svg', dark: true, colorScheme: 'forest' }]],
   },
 })
