@@ -5,35 +5,35 @@ import "@/styles/prose.css";
 import "@/styles/dot.css";
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: { src: string; alt?: string };
-	icon?: { src: string; alt?: string };
-	pageType?: "website" | "article";
+    title?: string;
+    description?: string;
+    image?: { src: string; alt?: string };
+    icon?: { src: string; alt?: string };
+    pageType?: "website" | "article";
 }
 const {
-	description = "",
-	image = siteConfig.image,
-	icon = siteConfig.icon,
-	pageType = "website",
+    description = "",
+    image = siteConfig.image,
+    icon = siteConfig.icon,
+    pageType = "website",
 } = Astro.props;
 
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(" | ");
 
 const resolvedImage = image?.src
-	? {
-			src: new URL(image.src, Astro.site).toString(),
-			alt: image.alt,
-		}
-	: undefined;
+    ? {
+            src: new URL(image.src, Astro.site).toString(),
+            alt: image.alt,
+        }
+    : undefined;
 
 const canonicalURL = new URL(Astro.request.url, Astro.site);
 
 function formatCanonicalURL(url: string | URL) {
-	const path = url.toString();
-	const hasQueryParams = path.includes("?");
-	if (hasQueryParams) path.replace(/\/?$/, "");
-	return path.replace(/\/?$/, hasQueryParams ? "" : "/");
+    const path = url.toString();
+    const hasQueryParams = path.includes("?");
+    if (hasQueryParams) path.replace(/\/?$/, "");
+    return path.replace(/\/?$/, hasQueryParams ? "" : "/");
 }
 ---
 
@@ -59,9 +59,9 @@ function formatCanonicalURL(url: string | URL) {
 <meta property='og:description' content={description} />
 {resolvedImage?.src && <meta property='og:image' content={resolvedImage.src} />}
 {
-	resolvedImage?.alt && (
-		<meta property='og:image:alt' content={resolvedImage.alt} />
-	)
+    resolvedImage?.alt && (
+        <meta property='og:image:alt' content={resolvedImage.alt} />
+    )
 }
 
 <!-- X / Twitter -->
@@ -70,24 +70,24 @@ function formatCanonicalURL(url: string | URL) {
 <meta property='twitter:title' content={title} />
 <meta property='twitter:description' content={description} />
 {
-	resolvedImage?.src && (
-		<meta property='twitter:image' content={resolvedImage.src} />
-	)
+    resolvedImage?.src && (
+        <meta property='twitter:image' content={resolvedImage.src} />
+    )
 }
 {
-	resolvedImage?.alt && (
-		<meta name='twitter:image:alt' content={resolvedImage?.alt} />
-	)
+    resolvedImage?.alt && (
+        <meta name='twitter:image:alt' content={resolvedImage?.alt} />
+    )
 }
 
 <script>
-	import nprogress from "nprogress";
+    import nprogress from "nprogress";
 
-	document.addEventListener("astro:before-preparation", () => {
-		nprogress.start();
-	});
+    document.addEventListener("astro:before-preparation", () => {
+        nprogress.start();
+    });
 
-	document.addEventListener("astro:page-load", () => {
-		nprogress.done();
-	});
+    document.addEventListener("astro:page-load", () => {
+        nprogress.done();
+    });
 </script>
