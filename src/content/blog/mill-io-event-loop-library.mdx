@@ -2,7 +2,15 @@
 title: mill-io - Event-loop library for Rust!
 date: 2025-08-22
 description: mill-io is a lightweight event loop library for Rust that provides efficient non-blocking I/O management without relying on heavyweight async runtimes. It's a reactor-based event loop implementation built on top of `mio`. In this article, we'll discuss it—the problem it solves, why it exists, and more!
+image: {
+    src: /imgs/mill-io-event-loop-library.png,
+    alt: "Birds with the crab and a mill in the background."
+
+} 
 ---
+
+import Mermaid from "@/components/Mermaid.astro";
+
 # Introduction
 Have you ever wondered how large-scale systems work internally? It's a really important question. In engineering, there are a lot of techniques that are used to solve various problems. All of those have pros and cons; there is no ***perfect solution***. Your job is to find the best solution for your case, one that has the pros that solve your problem and the fewest cons that you can bear. One of the critical problems is building a huge multi-user system. Throughout this article, we will discuss our problem and how we can solve it with our library, [mill-io](https://github.com/citadel-tech/Event-loop), an event-loop library I worked on during my Summer of Bitcoin internship to be used inside [Coinswap](https://github.com/citadel-tech/coinswap).
 
@@ -30,7 +38,6 @@ This project was built during my [Summer of Bitcoin](https://www.summerofbitcoin
 The event loop we built contains several components inside it, and we will discuss them one by one.
 ```mermaid
 graph TB
-
     subgraph "Application Layer"
         A1[User Code] --> A2[EventHandler Implementation]
         A2 --> A3[EventLoop API]
@@ -53,7 +60,7 @@ graph TB
         B3 --> D1[ObjectPool]
         D1 --> D2[Buffer Recycling]
     end
-````
+```
 
 ## 1. PollHandle, the I/O Polling Abstraction
 
@@ -97,7 +104,6 @@ You can also deregister them and poll the events.
 ## 2. ThreadPool - Task Executor
 
 After polling the events and the OS waking us up, we need to execute the handlers. The thread pool is similar to the `thread-per-connection` or `thread-per-task` model, but it limits the number of workers (threads) to reduce context-switching operations.
-
 ```mermaid
 flowchart TD
     A[ThreadPool] --> B[Channel Sender]
@@ -205,5 +211,5 @@ This project was developed as part of the **Summer of Bitcoin 2025** program. Sp
 
   - [Mill-io](https://github.com/citadel-tech/Event-loop)
   - [Event Loop Programming: A Different Way of Thinking](https://linuxjedi.co.uk/event-loop-programming-a-different-way-of-thinking)
-  - [Event Loop mechanism and how it works | by Praveen Ray - Medium](https://raypvn.medium.com/event-loop-mechanism-and-how-it-works-b038279778c4)
+  - [Event Loop mechanism and how it works](https://raypvn.medium.com/event-loop-mechanism-and-how-it-works-b038279778c4)
   - [JavaScript execution model - MDN - Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model)
