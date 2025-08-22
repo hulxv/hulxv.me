@@ -2,6 +2,7 @@
 	--at-apply: text-base lh-1.75 mb-16 sm: min-h-50vh min-h-38vh;
 	max-width: 300px !important;
 	overflow: unset;
+  margin: 2em auto !important;
 }
 
 @media (max-width: 840px) {
@@ -104,18 +105,20 @@
 	color: inherit;
 	border-left-width: 0.25rem;
 	border-color: rgba(125, 125, 125, 0.3);
-	quotes: "\201C" "\201D" "\2018" "\2019";
+	quotes: "";
 	margin-top: 1.6em;
 	margin-bottom: 1.6em;
 	padding-left: 1em;
+  border-left: 1px solid;
+
 }
 
 .prose blockquote p:first-of-type::before {
-	content: open-quote;
+	content: "";
 }
 
 .prose blockquote p:last-of-type::after {
-	content: close-quote;
+	content: "";
 }
 
 .prose h1 {
@@ -160,21 +163,20 @@
 }
 
 .prose code {
-	font-weight: 600;
+	font-weight: bold;
 	font-size: 0.875em;
+  text-decoration: underline;
+  font-family: "VT323", monospace;
 }
 
 .prose code::before {
-	content: "`";
+	content: "" ;
 }
 
 .prose code::after {
-	content: "`";
+	content: "";
 }
 
-.prose a code {
-	color: #111827;
-}
 
 .prose pre {
 	color: #e5e7eb;
@@ -200,6 +202,7 @@
 	font-size: inherit;
 	font-family: inherit;
 	line-height: inherit;
+  text-decoration: none;
 }
 
 .prose pre code::before {
