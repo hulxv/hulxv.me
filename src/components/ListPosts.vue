@@ -43,7 +43,7 @@ function getYear(date: Date | string | number) {
   <ul sm:min-h-38 min-h-28 mb-18>
     <template v-if="!list || list.length === 0">
       <div my-12 opacity-50>
-       Stay tuned ;D 
+        Stay tuned ;D
       </div>
     </template>
     <li v-for="(post, index) in list " :key="post.data.title" mb-8>

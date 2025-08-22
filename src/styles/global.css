@@ -1,22 +1,21 @@
 @font-face {
-    font-family: "arabic-pixel-font";
-    src: url("/arabic-pixel-font/arabic-pixel-1.otf") format("opentype");
+  font-family: 'arabic-pixel-font';
+  src: url('/arabic-pixel-font/arabic-pixel-1.otf') format('opentype');
 }
 
 @font-face {
-    font-family: "VT323";
-    src: url("/VT323/VT323-Regular.ttf") format("opentype");
+  font-family: 'VT323';
+  src: url('/VT323/VT323-Regular.ttf') format('opentype');
 }
 
 * {
-  font-family: "VT323", monospace;
+  font-family: 'VT323', monospace;
   font-weight: 500;
   font-style: normal;
 }
 
-
 .arabic-pixel-font {
-  font-family: "arabic-pixel-font";
+  font-family: 'arabic-pixel-font';
   font-weight: 500;
   font-style: normal;
 }

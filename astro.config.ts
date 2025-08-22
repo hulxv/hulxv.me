@@ -28,8 +28,8 @@ export default defineConfig({
     },
     syntaxHighlight: {
       type: 'shiki',
-      excludeLangs: ['mermaid'],
+      excludeLangs: ['mermaid', 'math'],
     },
-    rehypePlugins: [[rehypeMermaid, { strategy: 'img-svg', dark: true, colorScheme: 'forest' }]],
+    rehypePlugins: [[rehypeMermaid, { strategy: 'img-svg', colorScheme: 'forest' }]],
   },
 })

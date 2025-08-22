@@ -1,17 +1,12 @@
 import type { ProjectData } from '@/types'
 
-
-/**
-
-
- */
 export const projectData: ProjectData = [
   {
     title: 'GSoC @Metacall',
     projects: [
       {
         text: 'MetaSSR: An SSR framework for ReactJS built on Rust & Metacall',
-        description: "My project is about building an SSR framework for React.js (Like Next.js and Gatspy.js) that is built on Rust using a web framework called \"axum.rs\" to get a high performance, and using \"Metacall\" to know how it's (Metacall core) good and suitable for real uses. Also, I helped find some bugs in the core and made some benchmarks before starting my project.",
+        description: 'My project is about building an SSR framework for React.js (Like Next.js and Gatspy.js) that is built on Rust using a web framework called "axum.rs" to get a high performance, and using "Metacall" to know how it\'s(Metacall core) good and suitable for real uses. Also, I helped find some bugs in the core and made some benchmarks before starting my project.',
         href: 'https://github.com/metacall/rust-http-ssr',
       },
 
@@ -36,15 +31,15 @@ export const projectData: ProjectData = [
         href: 'https://github.com/hulxv/prqlite',
       },
       {
-        text: "Electronic document system",
-        description: "A highly encrypted, minimal document storage system was originally developed as part of a proposal for the Egyptian government to accelerate digitalization efforts further.",
-        href: "https://github.com/Zelakolase/EDS-MOE"
+        text: 'Electronic document system',
+        description: 'A highly encrypted, minimal document storage system was originally developed as part of a proposal for the Egyptian government to accelerate digitalization efforts further.',
+        href: 'https://github.com/Zelakolase/EDS-MOE',
       },
       {
-        text: "Fake Society",
-        description: "A frontend for a social media web application called `Fake Society`, I built it to be training for using Next.js and keeping up with Reactjs component libraries, and How I integrate Restful APIs in real world.",
-        href: "https://github.com/hulxv/fake-society-frontend"
-      }
+        text: 'Fake Society',
+        description: 'A frontend for a social media web application called `Fake Society`, I built it to be training for using Next.js and keeping up with Reactjs component libraries, and How I integrate Restful APIs in real world.',
+        href: 'https://github.com/hulxv/fake-society-frontend',
+      },
     ],
   },
 ]

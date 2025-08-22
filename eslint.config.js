@@ -8,4 +8,7 @@ export default antfu({
     astro: true,
     css: true,
   },
+  ignores: [
+    'public/**',
+  ],
 })

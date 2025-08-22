@@ -1,18 +1,20 @@
 <script lang="ts" setup>
 defineProps<{
   list: {
-    text: string;
-    description?: string;
-    icon?: string;
-    href: string;
-  }[];
-}>();
+    text: string
+    description?: string
+    icon?: string
+    href: string
+  }[]
+}>()
 </script>
 
 <template>
   <ul grid="~ cols-1 sm:cols-1 gap-4">
     <template v-if="!list || list.length === 0">
-      <div py10 opacity-50 text-lg>nothing here yet.</div>
+      <div py10 opacity-50 text-lg>
+        nothing here yet.
+      </div>
     </template>
     <li
       v-for="project in list"
