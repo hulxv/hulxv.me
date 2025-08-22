@@ -38,11 +38,11 @@ Code Snippet:
 
 ```ts
 export const data = {
-  name: 'Name',
-  value: 'Value'
-}
+	name: "Name",
+	value: "Value",
+};
 
 export function getName() {
-  return data.name
+	return data.name;
 }
 ```

@@ -1,63 +1,46 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import siteConfig from '@/site-config'
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import siteConfig from "@/site-config";
 ---
 
 <BaseLayout description={siteConfig.description}>
-  <article class="prose">
-    <h1 class="text-title uppercase rtl arabic-pixel-font" dir="rtl">
-      السلام عليكم!
-    </h1>
-    <h2>Who am I?</h2>
-    <p>
-      I am <u>Mohamed Emad</u> (or you can call me <u>Hulxv</u>), a hobbyist
-      software developer, and GNU/Linux user (I use Arch BTW xD). interested in
-      Low-level programming and how the software works behind the scenes and I
-      spend my time building open-source projects and publishing them on
-      <a href="https://github.com/hulxv" target="_blank">Github</a>, and
-      contributing to others. Currently, I am interested in <a
-        href="https://github.com/llvm/llvm-project"
-        target="_blank">the LLVM project</a
-      > and compiler engineering and <a
-        href="https://github.com/llvm/llvm-project/issues?q=author%3Ahulxv"
-        target="_blank">have made some small contributions</a
-      >. I intend to also write about these topics in the future.
-    </p>
-    <p class="flex justify-center w-full">
-      <img
-        width="640"
-        height="360"
-        src={siteConfig.image.src}
-        alt={siteConfig.image.alt}
-      />
-    </p>
+	<article class="prose">
+		<h1 class="text-title rtl arabic-pixel-font uppercase" dir="rtl">السلام عليكم!</h1>
+		<h2>Who am I?</h2>
+		<p>
+			I am <u>Mohamed Emad</u> (or you can call me <u>Hulxv</u>), a hobbyist software developer, and
+			GNU/Linux user (I use Arch BTW xD). interested in Low-level programming and how the software
+			works behind the scenes and I spend my time building open-source projects and publishing them
+			on
+			<a href="https://github.com/hulxv" target="_blank">Github</a>, and contributing to others.
+			Currently, I am interested in <a href="https://github.com/llvm/llvm-project" target="_blank"
+				>the LLVM project</a
+			> and compiler engineering and <a
+				href="https://github.com/llvm/llvm-project/issues?q=author%3Ahulxv"
+				target="_blank">have made some small contributions</a
+			>. I intend to also write about these topics in the future.
+		</p>
+		<p class="flex w-full justify-center">
+			<img width="640" height="360" src={siteConfig.image.src} alt={siteConfig.image.alt} />
+		</p>
 
-    <hr class="hr-line" />
-    <p>Find me on</p>
-    <p class="flex gap-x-4 gap-y-2 flex-wrap">
-      {
-        siteConfig.socialLinks.map((link) => (
-          <a
-            aria-label={link.text}
-            href={link.href}
-            target="_blank"
-            class="prose-link"
-          >
-            <i class:list={[link.icon]} />
-            {link.text}
-          </a>
-        ))
-      }
-    </p>
-    <p>
-      If you want to contact me, please email me at
-      <a
-        prose-link
-        aria-label={siteConfig.email}
-        href={`mailto:${siteConfig.email}`}
-      >
-        {siteConfig.email}
-      </a>, or any of the above links.
-    </p>
-  </article>
+		<hr class="hr-line" />
+		<p>Find me on</p>
+		<p class="flex flex-wrap gap-x-4 gap-y-2">
+			{
+				siteConfig.socialLinks.map((link) => (
+					<a aria-label={link.text} href={link.href} target="_blank" class="prose-link">
+						<i class:list={[link.icon]} />
+						{link.text}
+					</a>
+				))
+			}
+		</p>
+		<p>
+			If you want to contact me, please email me at
+			<a prose-link aria-label={siteConfig.email} href={`mailto:${siteConfig.email}`}>
+				{siteConfig.email}
+			</a>, or any of the above links.
+		</p>
+	</article>
 </BaseLayout>

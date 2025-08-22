@@ -1,82 +1,82 @@
 export const siteConfig = {
-  author: 'Mohamed Emad (Hulxv)',
-  title: 'hulxv',
-  // subtitle: "Vitesse theme for Astro, supports Vue and UnoCSS.",
-  description: 'the official blog of Hulxv, the greatest software developer in his home.',
-  image: {
-    src: '/hero.birds.webp',
-    alt: 'Birds, flying in the sky',
-  },
-  icon: {
-    src: '/logo/favicon.ico',
-    alt: 'My Bird',
-  },
-  email: 'hulxxv@gmail.com',
-  socialLinks: [
-    {
-      text: 'GitHub',
-      href: 'https://github.com/hulxv',
-      icon: 'i-simple-icons-github',
-      header: 'i-ri-github-line',
-    },
-    {
-      text: 'Linkedin',
-      href: 'https://linkedin.com/in/hulxv',
-      icon: 'i-simple-icons-linkedin',
-    },
-  ],
-  header: {
-    logo: {
-      src: '/logo/android-chrome-512x512.png',
-      alt: 'Logo Image',
-    },
-    navLinks: [
-      {
-        text: 'Blog',
-        href: '/blog',
-      },
-      {
-        text: 'Projects',
-        href: '/projects',
-      },
-    ],
-  },
-  page: {
-    blogLinks: [
-      {
-        text: 'Blog',
-        href: '/blog',
-      },
-      // {
-      //   text: "Talks",
-      //   href: "/blog/talks",
-      // },
-    ],
-  },
-  footer: {
-    navLinks: [
-      {
-        text: 'Home',
-        href: '/',
-      },
-      {
-        text: 'Blogs',
-        href: '/blogs',
-      },
-      {
-        text: 'Projects',
-        href: '/projects',
-      },
-      {
-        text: 'Linkedin',
-        href: 'https://www.linkedin.com/in/hulxv',
-      },
-      {
-        text: 'GitHub',
-        href: 'https://github.com/hulxv',
-      },
-    ],
-  },
-}
+	author: "Mohamed Emad (Hulxv)",
+	title: "hulxv",
+	// subtitle: "Vitesse theme for Astro, supports Vue and UnoCSS.",
+	description: "the official blog of Hulxv, the greatest software developer in his home.",
+	image: {
+		src: "/hero.birds.webp",
+		alt: "Birds, flying in the sky",
+	},
+	icon: {
+		src: "/logo/favicon.ico",
+		alt: "My Bird",
+	},
+	email: "hulxxv@gmail.com",
+	socialLinks: [
+		{
+			text: "GitHub",
+			href: "https://github.com/hulxv",
+			icon: "i-simple-icons-github",
+			header: "i-ri-github-line",
+		},
+		{
+			text: "Linkedin",
+			href: "https://linkedin.com/in/hulxv",
+			icon: "i-simple-icons-linkedin",
+		},
+	],
+	header: {
+		logo: {
+			src: "/logo/android-chrome-512x512.png",
+			alt: "Logo Image",
+		},
+		navLinks: [
+			{
+				text: "Blog",
+				href: "/blog",
+			},
+			{
+				text: "Projects",
+				href: "/projects",
+			},
+		],
+	},
+	page: {
+		blogLinks: [
+			{
+				text: "Blog",
+				href: "/blog",
+			},
+			// {
+			//   text: "Talks",
+			//   href: "/blog/talks",
+			// },
+		],
+	},
+	footer: {
+		navLinks: [
+			{
+				text: "Home",
+				href: "/",
+			},
+			{
+				text: "Blogs",
+				href: "/blogs",
+			},
+			{
+				text: "Projects",
+				href: "/projects",
+			},
+			{
+				text: "Linkedin",
+				href: "https://www.linkedin.com/in/hulxv",
+			},
+			{
+				text: "GitHub",
+				href: "https://github.com/hulxv",
+			},
+		],
+	},
+};
 
-export default siteConfig
+export default siteConfig;
