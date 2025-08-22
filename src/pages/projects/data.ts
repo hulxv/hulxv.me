@@ -17,7 +17,7 @@ export const projectData: ProjectData = [
     projects: [
       {
         text: 'vnStat Client',
-        description: 'An open-source GUI client for \href{https://humdi.net/vnstat/}{vnstat} (a traffic monitor for GNU/Linux and BSD), and built on ElectronJS & NextJS.',
+        description: 'An open-source GUI client for vnstat (a traffic monitor for GNU/Linux and BSD), and built on ElectronJS & NextJS.',
         href: 'https://github.com/hulxv/vnstat-client',
       },
       {
@@ -37,7 +37,7 @@ export const projectData: ProjectData = [
       },
       {
         text: 'Fake Society',
-        description: 'A frontend for a social media web application called `Fake Society`, I built it to be training for using Next.js and keeping up with Reactjs component libraries, and How I integrate Restful APIs in real world.',
+        description: 'A frontend for a social media web application called "Fake Society", I built it to be training for using Next.js and keeping up with Reactjs component libraries, and How I integrate Restful APIs in real world.',
         href: 'https://github.com/hulxv/fake-society-frontend',
       },
     ],
