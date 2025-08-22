@@ -4,7 +4,7 @@ export const siteConfig = {
   // subtitle: "Vitesse theme for Astro, supports Vue and UnoCSS.",
   description: 'the official blog of Hulxv, the greatest software developer in his home.',
   image: {
-    src: '/hero.birds.png',
+    src: '/hero.birds.webp',
     alt: 'Birds, flying in the sky',
   },
   icon: {
