@@ -28,6 +28,14 @@ function getDate(date: string) {
 ---
 
 <BaseLayout title={title} description={description} pageType="article">
+	<div class="flex gap-2 mb-4">
+		<select class="size-control">
+			<option value="text-sm">Small</option>
+			<option value="text-base">Base</option>
+			<option value="text-lg">Large</option>
+			<option value="text-xl">Extra Large</option>
+		</select>
+	</div>
 	<article class="prose">
 		<h1>{title}</h1>
 		<p op-50>
@@ -45,3 +53,10 @@ function getDate(date: string) {
 		<Content />
 	</article>
 </BaseLayout>
+
+<script>
+	const article = document.querySelector('.prose');
+	document.querySelector('.size-control').addEventListener('change', (e) => {
+		article.className = `prose ${e.target.value}`;
+	});
+</script>

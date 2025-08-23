@@ -3,7 +3,7 @@
   max-width: 300px !important;
   overflow: unset;
   margin: 2em auto !important;
-  font-size:small;
+  font-size: var(--prose-font-size, medium);
 }
 
 
@@ -16,13 +16,44 @@
 @media (min-width: 840px) {
   .prose {
     max-width: 800px !important;
-    font-size: large;
   }
 
   .prose img {
     max-width: 760px;
   }
 }
+
+.prose.text-sm {
+  --prose-font-size: 0.875rem;
+}
+
+.prose.text-base {
+  --prose-font-size: 1rem;
+}
+
+.prose.text-lg {
+  --prose-font-size: 1.125rem;
+}
+
+.prose.text-xl {
+  --prose-font-size: 1.25rem;
+}
+
+.font-control,
+.size-control {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #8882;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  font-size: small;
+}
+
+.font-control:hover,
+.size-control:hover {
+  border-color: #8885;
+}
+
 
 .prose a {
   --at-apply: prose-link;
@@ -604,18 +635,4 @@
 
 .prose-sm> :last-child {
   margin-bottom: 0;
-}
-
-.font-control,
-.size-control {
-  padding: 0.3rem 0.8rem;
-  border: 1px solid #8882;
-  border-radius: 4px;
-  background: transparent;
-  cursor: pointer;
-}
-
-.font-control:hover,
-.size-control:hover {
-  border-color: #8885;
 }
