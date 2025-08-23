@@ -33,7 +33,7 @@ The event loop is a programming construct, not an OS primitive. It's a single-th
 
 This technique is mainly used to get the best performance using a single thread. It's primarily used by Node.js, and there are a lot of famous libraries to implement it, like [libevent](https://libevent.org/) and [libuv](https://libuv.org/). We can also add some enhancements by implementing it in a multi-threaded way, like what I did in [mill-io](https://github.com/citadel-tech/Event-loop).
 
-# How `mill-io` Works and Why It Exists?
+# How mill-io Works and Why It Exists?
 
 This project was built during my [Summer of Bitcoin](https://www.summerofbitcoin.org/) internship (I will write an article about it soon) for the [Citadel-tech](https://github.com/citadel-tech) organization to be used inside the [Coinswap project](https://github.com/citadel-tech/coinswap) to enhance its performance through better I/O operation management without relying on heavyweight async runtimes such as [tokio-rs](https://tokio.rs/) and [async-std](https://github.com/async-rs/async-std). The implementation leverages **mio**'s polling capabilities to create a [reactor-based architecture](https://en.wikipedia.org/wiki/Reactor_pattern) with a configurable thread pool, ensuring **Coinswap**'s core logic remains runtime-agnostic while achieving optimal performance and resource utilization.
 

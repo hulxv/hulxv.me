@@ -9,9 +9,20 @@
 }
 
 * {
-	font-family: "VT323", monospace;
-	font-weight: 500;
-	font-style: normal;
+	font-family: "JetBrains Mono", monospace;
+	font-weight: 0;
+	font-style:normal;
+
+}
+
+.desc {
+  font-size: smaller;
+}
+
+@media (min-width: 640px) {
+  .desc {
+    font-size: medium;
+  }
 }
 
 .arabic-pixel-font {

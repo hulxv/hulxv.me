@@ -3,8 +3,9 @@
   max-width: 300px !important;
   overflow: unset;
   margin: 2em auto !important;
-  font-size: large;
+  font-size:small;
 }
+
 
 @media (max-width: 840px) {
   .prose img {
@@ -15,6 +16,7 @@
 @media (min-width: 840px) {
   .prose {
     max-width: 800px !important;
+    font-size: large;
   }
 
   .prose img {
@@ -168,7 +170,7 @@
   font-weight: bold;
   font-size: 0.875em;
   text-decoration: underline;
-  font-family: "VT323", monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .prose code::before {
@@ -602,4 +604,18 @@
 
 .prose-sm> :last-child {
   margin-bottom: 0;
+}
+
+.font-control,
+.size-control {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #8882;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.font-control:hover,
+.size-control:hover {
+  border-color: #8885;
 }
