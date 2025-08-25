@@ -1,6 +1,6 @@
 export const siteConfig = {
-	author: "Mohamed Emad (Hulxv)",
-	title: "hulxv",
+	author: "Mohamed Emad",
+	title: "The Real Hulxv",
 	// subtitle: "Vitesse theme for Astro, supports Vue and UnoCSS.",
 	description: "the official blog of Hulxv, the greatest software developer in his home.",
 	image: {

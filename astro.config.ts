@@ -6,7 +6,7 @@ import vue from "@astrojs/vue";
 import rehypeMermaid from "rehype-mermaid";
 
 export default defineConfig({
-	site: "https://hulxv.vercel.app/",
+	site: "https://hulxv.netlify.app",
 	server: {
 		port: 1977,
 	},
