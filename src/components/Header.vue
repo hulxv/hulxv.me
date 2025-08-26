@@ -114,7 +114,7 @@ function toggleNavDrawer() {
 			/>
 
 			<a nav-link target="_blank" href="/rss.xml" i-ri-rss-line aria-label="RSS" />
-			<ThemeToggle />
+			<!-- <ThemeToggle /> -->
 		</div>
 	</header>
 	<nav class="nav-drawer flex flex-col justify-between sm:hidden">
@@ -144,7 +144,7 @@ function toggleNavDrawer() {
 			/>
 
 			<a nav-link target="_blank" href="/rss.xml" i-ri-rss-line aria-label="RSS" />
-			<ThemeToggle />
+			<!-- <ThemeToggle /> -->
 		</div>
 	</nav>
 	<div class="nav-drawer-mask" @click="toggleNavDrawer()" />

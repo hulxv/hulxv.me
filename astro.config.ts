@@ -30,6 +30,6 @@ export default defineConfig({
 			type: "shiki",
 			excludeLangs: ["mermaid", "math"],
 		},
-		rehypePlugins: [[rehypeMermaid, { strategy: "img-svg", colorScheme: "forest" }]],
+		rehypePlugins: [[rehypeMermaid, { strategy: "img-svg", dark: true, theme: "forest" }]],
 	},
 });
