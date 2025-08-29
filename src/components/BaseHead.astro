@@ -10,12 +10,18 @@ interface Props {
 	image?: { src: string; alt?: string };
 	icon?: { src: string; alt?: string };
 	pageType?: "website" | "article";
+	publishDate?: string;
+	modifiedDate?: string;
+	tags?: string[];
 }
 const {
 	description = siteConfig.description,
 	image = siteConfig.image,
 	icon = siteConfig.icon,
 	pageType = "website",
+	publishDate,
+	modifiedDate,
+	tags,
 } = Astro.props;
 
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(" | ");
@@ -51,22 +57,73 @@ function formatCanonicalURL(url: string | URL) {
 <!-- Page Metadata -->
 <link rel='canonical' href={formatCanonicalURL(canonicalURL)} />
 <meta name='description' content={description} />
+<meta name='author' content={siteConfig.author || siteConfig.title} />
+<meta name='robots' content='index, follow' />
+<meta name='language' content='en' />
+<meta name='theme-color' content='#000000' />
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content={pageType} />
 <meta property='og:url' content={formatCanonicalURL(canonicalURL)} />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
+<meta property='og:site_name' content={siteConfig.title} />
+<meta property='og:locale' content='en_US' />
 {resolvedImage?.src && <meta property='og:image' content={resolvedImage.src} />}
+{resolvedImage?.src && <meta property='og:image:secure_url' content={resolvedImage.src} />}
+{resolvedImage?.src && <meta property='og:image:width' content='1200' />}
+{resolvedImage?.src && <meta property='og:image:height' content='630' />}
+{resolvedImage?.src && <meta property='og:image:type' content='image/webp' />}
 {resolvedImage?.alt && <meta property='og:image:alt' content={resolvedImage.alt} />}
+{pageType === 'article' && <meta property='article:author' content={siteConfig.author || siteConfig.title} />}
+{pageType === 'article' && publishDate && <meta property='article:published_time' content={publishDate} />}
+{pageType === 'article' && modifiedDate && <meta property='article:modified_time' content={modifiedDate} />}
+{pageType === 'article' && tags?.length && <meta property='article:tag' content={tags.join(', ')} />}
 
 <!-- X / Twitter -->
-<meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content={formatCanonicalURL(canonicalURL)} />
-<meta property='twitter:title' content={title} />
-<meta property='twitter:description' content={description} />
-{resolvedImage?.src && <meta property='twitter:image' content={resolvedImage.src} />}
+<meta name='twitter:card' content='summary_large_image' />
+<meta name='twitter:url' content={formatCanonicalURL(canonicalURL)} />
+<meta name='twitter:title' content={title} />
+<meta name='twitter:description' content={description} />
+<meta name='twitter:site' content={`@${siteConfig.social.twitter}`} />
+<meta name='twitter:creator' content={`@${siteConfig.social.twitter}`} />
+{resolvedImage?.src && <meta name='twitter:image' content={resolvedImage.src} />}
 {resolvedImage?.alt && <meta name='twitter:image:alt' content={resolvedImage?.alt} />}
+
+<!-- Additional SEO & Performance -->
+<meta name='format-detection' content='telephone=no' />
+<meta name='mobile-web-app-capable' content='yes' />
+<meta name='apple-mobile-web-app-capable' content='yes' />
+<meta name='apple-mobile-web-app-status-bar-style' content='default' />
+<meta name='apple-mobile-web-app-title' content={siteConfig.title} />
+
+<!-- LinkedIn -->
+{resolvedImage?.src && <meta property='linkedin:image' content={resolvedImage.src} />}
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": pageType === "article" ? "Article" : "WebSite",
+  "name": title,
+  "description": description,
+  "url": formatCanonicalURL(canonicalURL),
+  ...(resolvedImage?.src && { "image": resolvedImage.src }),
+  ...(pageType === "article" && {
+    "author": {
+      "@type": "Person",
+      "name": siteConfig.author || siteConfig.title
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteConfig.title
+    },
+    "datePublished": publishDate || new Date().toISOString(),
+    "dateModified": modifiedDate || publishDate || new Date().toISOString(),
+    ...(tags?.length && { "keywords": tags.join(", ") })
+  })
+})}
+</script>
 
 <!-- Fonts -->
 <!-- Jetbrains -->

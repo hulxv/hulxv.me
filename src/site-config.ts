@@ -11,6 +11,9 @@ export const siteConfig = {
 		src: "/logo/favicon.ico",
 		alt: "My Bird",
 	},
+	social: {
+		twitter: "realhulxv"
+	},
 	email: "hulxxv@gmail.com",
 	socialLinks: [
 		{

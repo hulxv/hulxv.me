@@ -1,48 +1,70 @@
 ---
+import { getCollection } from "astro:content";
+import { statSync } from "fs";
+import { join } from "path";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ListPosts from "@/components/ListPosts.vue";
-import siteConfig from "@/site-config";
-import { getPosts } from "@/utils/posts";
+import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-	const paths = siteConfig.page.blogLinks.map((nav) => {
-		const href = nav.href.replace("/blog", "");
-		return {
-			params: {
-				path: href === "" ? undefined : href.replace(/^\/+|\/+$/g, ""),
-			},
-		};
-	});
-	return paths;
+	const posts = await getCollection("blog");
+	return posts.map((post) => ({
+		params: { path: post.slug },
+		props: { post },
+	}));
 }
 
-const { path } = Astro.params;
+type Props = {
+	post: CollectionEntry<"blog">;
+};
 
-const posts = await getPosts(path);
+const { post } = Astro.props;
+const { title, description, image, date, tags } = post.data;
 
-function activeLink(pathname: string) {
-	return Astro.url.pathname.replace(/\/+/g, "/").replace(/\/$/, "") === pathname;
+// Get file modification time
+const filePath = join(process.cwd(), "src", "content", "blog", `${post.slug}.mdx`);
+let modifiedDate: string | undefined;
+
+try {
+	const stats = statSync(filePath);
+	modifiedDate = stats.mtime.toISOString();
+} catch (error) {
+	console.warn(`Could not get modification time for ${filePath}:`, error);
 }
+
+const { Content } = await post.render();
 ---
 
-<BaseLayout
-	title="Blog"
-	description="List of all the blog posts."
-	pageNav={true}
-	pageOperate={true}
+<BaseLayout 
+	title={title} 
+	description={description} 
+	image={image} 
+	pageType="article"
+	publishDate={typeof date === 'string' ? new Date(date).toString() : date}
+	modifiedDate={modifiedDate}
+	tags={tags}
 >
-	<div class="mb-8 flex flex-col flex-wrap gap-2 sm:flex-row sm:gap-4">
-		{
-			siteConfig.page.blogLinks.map((nav) => (
-				<a
-					aria-label={nav.text}
-					class={`nav-link text-3xl font-bold ${activeLink(nav.href) ? "opacity-80" : "opacity-30 hover:opacity-50"}`}
-					href={nav.href}
-				>
-					{nav.text}
-				</a>
-			))
-		}
-	</div>
-	<ListPosts list={posts} />
+	<article class="prose max-w-3xl mx-auto">
+		<header class="mb-8">
+			<h1 class="text-4xl font-bold mb-4">{title}</h1>
+			{description && <p class="text-lg text-gray-600 mb-4">{description}</p>}
+			<time class="text-sm text-gray-500" datetime={date}>{date}</time>
+		</header>
+		
+		{image && (
+			<div class="mb-8">
+				<img 
+					width="1200" 
+					height="630" 
+					src={image.src} 
+					alt={image.alt || title} 
+					class="w-full h-auto rounded-lg shadow-lg"
+				/>
+			</div>
+		)}
+		
+		<div class="prose lg:prose-xl">
+			<Content />
+		</div>
+	</article>
 </BaseLayout>
+

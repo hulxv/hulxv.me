@@ -23,7 +23,7 @@ function getDate(date: string) {
 
 function getHref(post: Post) {
 	if (post.data.redirect) return post.data.redirect;
-	return `/posts/${post.slug}`;
+	return `/blog/${post.slug}`;
 }
 
 function getTarget(post: Post) {
@@ -94,6 +94,35 @@ function getYear(date: Date | string | number) {
 					</div>
 				</div>
 				<div opacity-50 text-sm>{{ post.data.description }}</div>
+				<div v-if="post.data.tags && post.data.tags.length > 0" flex="~ gap-1 wrap" mt-2>
+					<span 
+						v-for="tag in post.data.tags.slice(0, 5)" 
+						:key="tag"
+						text-xs 
+						px-2 
+						py-1 
+						bg-gray-100 
+						dark:bg-gray-800 
+						rounded-full
+						opacity-70
+						hover:opacity-90
+						transition-opacity
+					>
+						{{ tag }}
+					</span>
+					<span 
+						v-if="post.data.tags.length > 5"
+						text-xs 
+						px-2 
+						py-1 
+						bg-gray-100 
+						dark:bg-gray-800 
+						rounded-full
+						opacity-50
+					>
+						+{{ post.data.tags.length - 5 }}
+					</span>
+				</div>
 			</a>
 		</li>
 	</ul>
