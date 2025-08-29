@@ -30,38 +30,109 @@ You don't need to worry about that. The OS provides some syscalls that you can u
 
 # So, What's the Event Loop?
 
-The event loop is a programming construct, not an OS primitive. It's a single-threaded loop that continuously checks for and processes incoming events and callbacks. Think of it as a supervisor for non-blocking operations.
+Now that we understand the problem and know we need a better solution, let's explore what an event loop actually is and how it solves our scalability issues.
 
-Imagine the event loop as a receptionist at a busy office. The receptionist waits for guests (events) to arrive, then directs each guest to the right office (handler/callback) as soon as they're ready to be seen. This way, no guest is left waiting unnecessarily, and the receptionist never gets overwhelmed by trying to help everyone at once.
+The event loop is a programming construct that's designed specifically to handle our I/O bottleneck problem. Instead of blocking threads while waiting for I/O operations, it uses a different approach: **non-blocking I/O with event notifications**.
+
+Think of it like this: instead of having a waiter (thread) stand by each table (connection) waiting for customers to finish reading the menu, you have one smart coordinator who watches all tables at once and only sends a waiter when a customer is actually ready to order.
+
+**Here's how the event loop solves our problems:**
+
+1. **Single-threaded efficiency**: One thread can monitor thousands of connections
+2. **No blocking**: Instead of waiting for I/O, we get notified when it's ready
+3. **Minimal context switching**: Fewer threads mean less overhead
+4. **Better resource utilization**: CPU time is used for actual work, not waiting
 
 **Step-by-Step Breakdown:**
-1. Wait for events (like incoming data or connections)
-2. Detect which events are ready to be processed
-3. Dispatch each event to its handler
-4. Repeat the loop
+1. Register interest in I/O events (like incoming data or connections)
+2. Wait for the OS to tell us when something is ready
+3. Handle the ready events quickly
+4. Return to waiting for more events
 
-This technique is mainly used to get the best performance using a single thread. It's primarily used by Node.js, and there are a lot of famous libraries to implement it, like [libevent](https://libevent.org/) and [libuv](https://libuv.org/). We can also add some enhancements by implementing it in a multi-threaded way, like what I did in [mill-io](https://github.com/citadel-tech/Event-loop).
-
-Unlike the thread-per-connection model, the event loop handles many connections with just one (or a few) threads, reducing memory usage and context-switching overhead. It is especially efficient for I/O-bound tasks.
-
-While traditional event loops are single-threaded, integrating a thread pool allows the system to process multiple events in parallel. The event loop can quickly detect and dispatch I/O events, while the thread pool executes event handlers or CPU-bound tasks concurrently. This approach improves scalability and responsiveness, especially under heavy load or when tasks require significant computation. In mill-io, the thread pool is configurable, so you can balance resource usage and performance for your specific use case.
-
-**Minimal Pseudo-code Example:**
-```rust
-loop {
-    let events = poll_for_events(); // Wait for I/O events
-    for event in events {
-        thread_pool.execute(|| handle_event(event)); // Dispatch to thread pool
-    }
-}
-```
+This is exactly what Node.js uses to handle thousands of concurrent connections with just one thread. Libraries like [libevent](https://libevent.org/) and [libuv](https://libuv.org/) implement this pattern and power many high-performance systems.
 
 
 # Internals of Polling
 
-Polling is a key technique for handling I/O efficiently in operating systems and networked programs. It started with the early UNIX `select` syscall, which let programs watch multiple files or sockets to see when they were ready for reading or writing. As systems grew, new APIs like `poll`, `epoll` (Linux), `kqueue` (BSD/macOS), and `IOCP` (Windows) were created to handle more connections and improve speed.
+You might wonder: "How does the event loop actually know when I/O is ready?" The answer lies in **polling** - a key technique that makes all of this possible.
 
-With polling, your program tells the OS what events it cares about (like when a socket is ready to read). The OS only wakes up your program when something actually happens, so you don't waste time constantly checking. This makes it possible for a single thread to manage thousands of connections without getting stuck waiting or using too much CPU.
+Polling is the bridge between our application and the operating system's I/O capabilities. Remember our problem with blocking I/O? Polling solves this by letting us ask the OS: "Tell me when any of these sockets are ready, but don't make me wait if none are ready right now."
+
+## The Evolution of Polling
+
+This wasn't always available. Early systems had limited options:
+
+**The Old Way (select)**: The original UNIX `select` syscall was revolutionary but had limitations. You could only monitor a limited number of file descriptors, and it wasn't very efficient for large numbers of connections.
+
+**The Better Way (poll, epoll, kqueue)**: As systems evolved, new APIs were created:
+- `epoll`, `poll` (Linux)
+- `kqueue` (BSD/macOS)
+- `IOCP` (Windows)
+
+## How Modern Polling Works
+
+With modern polling APIs, your program can efficiently manage thousands of connections:
+
+1. **Register Interest**: Tell the OS which files/sockets you care about
+2. **Specify Events**: Say whether you want to know about reads, writes, or both
+3. **Wait for Notifications**: The OS wakes you up only when something is ready
+4. **Handle Events**: Process the ready operations without blocking
+
+Let's see how this looks in practice with `epoll` on Linux:
+
+```c
+#include <sys/epoll.h>
+
+// Create an epoll instance
+int epfd = epoll_create1(0);
+
+// Register a socket for read events
+struct epoll_event event;
+event.events = EPOLLIN;  // We want to know about reads
+event.data.fd = socket_fd;
+epoll_ctl(epfd, EPOLL_CTL_ADD, socket_fd, &event);
+
+// Wait for events (this is the magic!)
+struct epoll_event events[MAX_EVENTS];
+int num_events = epoll_wait(epfd, events, MAX_EVENTS, -1);
+
+// Handle ready events
+for (int i = 0; i < num_events; i++) {
+    if (events[i].events & EPOLLIN) {
+        // Socket is ready for reading - no blocking!
+        handle_read(events[i].data.fd);
+    }
+}
+```
+
+This is exactly what makes our event loop solution so powerful - we're not constantly checking (busy-waiting) or blocking. We get precise notifications only when work is available.
+
+In Rust with `mio` (which mill-io uses), this becomes even cleaner:
+
+```rust
+use mio::{Events, Interest, Poll, Token};
+
+let mut poll = Poll::new()?;
+let mut events = Events::with_capacity(1024);
+
+// Register socket for read events
+poll.registry().register(&mut socket, Token(0), Interest::READABLE)?;
+
+// Wait for events - non-blocking and efficient
+poll.poll(&mut events, None)?;
+
+for event in events.iter() {
+    match event.token() {
+        Token(0) => {
+            // Our socket is ready to read!
+            handle_socket_read();
+        }
+        _ => unreachable!(),
+    }
+}
+```
+
+Modern event loops like mill-io use libraries like `mio` to abstract these platform differences, giving you the best available polling mechanism on any system.
 
 # Other Solutions
 
