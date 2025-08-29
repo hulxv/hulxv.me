@@ -63,8 +63,6 @@ Polling is a key technique for handling I/O efficiently in operating systems and
 
 With polling, your program tells the OS what events it cares about (like when a socket is ready to read). The OS only wakes up your program when something actually happens, so you don't waste time constantly checking. This makes it possible for a single thread to manage thousands of connections without getting stuck waiting or using too much CPU.
 
-Modern event loops rely on these polling APIs to scale up and handle lots of users. By using tools like epoll, kqueue, or IOCP, your application can efficiently wait for I/O events and respond quickly, even with thousands or millions of connections.
-
 # Other Solutions
 
 Event loops aren't the only way to handle concurrency, especially for I/O-bound tasks. There are many approaches to solve our problem:
@@ -79,7 +77,7 @@ Event loops aren't the only way to handle concurrency, especially for I/O-bound 
 
 This project was built during my [Summer of Bitcoin](https://www.summerofbitcoin.org/) internship (I will write an article about it soon) for the [Citadel-tech](https://github.com/citadel-tech) organization to be used inside the [Coinswap project](https://github.com/citadel-tech/coinswap) to enhance its performance through better I/O operation management without relying on heavyweight async runtimes such as [tokio-rs](https://tokio.rs/) and [async-std](https://github.com/async-rs/async-std). The implementation leverages **mio**'s polling capabilities to create a [reactor-based architecture](https://en.wikipedia.org/wiki/Reactor_pattern) with a configurable thread pool, ensuring **Coinswap**'s core logic remains runtime-agnostic while achieving optimal performance and resource utilization.
 
-# mill-io Architecture 
+# Mill-IO Architecture 
 
 Let's break down how mill-io works behind the scenes. The event loop is made up of a few simple building blocks that work together to handle lots of connections efficiently. Here's a quick overview:
 
