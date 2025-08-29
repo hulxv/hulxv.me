@@ -28,7 +28,7 @@ export const siteConfig = {
 	header: {
 		logo: {
 			src: "/logo/android-chrome-512x512.png",
-			alt: "Logo Image",
+			alt: "Official logo as a Bird",
 		},
 		navLinks: [
 			{

@@ -12,7 +12,7 @@ interface Props {
 	pageType?: "website" | "article";
 }
 const {
-	description = "",
+	description = siteConfig.description,
 	image = siteConfig.image,
 	icon = siteConfig.icon,
 	pageType = "website",

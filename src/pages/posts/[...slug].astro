@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { type CollectionPosts } from "@/types";
 import { getPosts } from "@/utils/posts";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
 	const posts = await getPosts();
@@ -27,16 +28,16 @@ function getDate(date: string) {
 }
 ---
 
-<BaseLayout title={title} description={description} image={image} pageType="article">
-	<div class="flex gap-2 mb-4">
-		<select class="size-control">
-			<option value="text-sm" selected>Small</option>
-			<option value="text-base">Base</option>
-			<option value="text-lg">Large</option>
-			<option value="text-xl">Extra Large</option>
+<BaseLayout title={title} description={description} image={image} pageType='article'>
+	<div class='mb-4 flex gap-2'>
+		<select class='size-control'>
+			<option value='text-sm' selected>Small</option>
+			<option value='text-base'>Base</option>
+			<option value='text-lg'>Large</option>
+			<option value='text-xl'>Extra Large</option>
 		</select>
 	</div>
-	<article class="prose text-sm">
+	<article class='prose text-sm'>
 		<h1>{title}</h1>
 		<p op-50>
 			{date && <time datetime={getDate(date)}>{date.split(",")}</time>}
@@ -46,7 +47,7 @@ function getDate(date: string) {
 		{
 			image && (
 				<p>
-					<img width="640" height="360" src={image.src} alt={image.alt || ""} />
+					<Image width='640' height='360' src={image.src} alt={image.alt || ""} />
 				</p>
 			)
 		}
@@ -55,8 +56,8 @@ function getDate(date: string) {
 </BaseLayout>
 
 <script>
-	const article = document.querySelector('.prose');
-	document.querySelector('.size-control').addEventListener('change', (e) => {
+	const article = document.querySelector(".prose");
+	document.querySelector(".size-control").addEventListener("change", (e) => {
 		article.className = `prose ${e.target.value}`;
 	});
 </script>
