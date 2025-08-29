@@ -2,29 +2,149 @@
   --at-apply: lh-1.75 mb-16 sm: min-h-50vh min-h-38vh;
   max-width: 300px !important;
   overflow: unset;
-  margin: 2em auto !important;
+  margin: 1em auto !important;
   font-size: var(--prose-font-size, medium);
 }
 
 
-@media (max-width: 840px) {
+@media (max-width: 480px) {
+  .prose {
+    --prose-font-size: 0.875rem;
+    padding: 0 0rem;
+    margin: 0.1rem auto !important;
+    max-width: 340px !important;
+  }
+
   .prose img {
     max-width: 300px;
+    margin: 0rem auto;
+  }
+
+  .prose h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .prose h2 {
+    font-size: 1.25rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .prose h3 {
+    font-size: 1.125rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .prose p {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .prose li {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .prose blockquote {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-left: 1rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
-@media (min-width: 840px) {
+@media (min-width: 481px) and (max-width: 768px) {
   .prose {
-    max-width: 800px !important;
+    --prose-font-size: 0.9rem;
+    max-width: 480px !important;
+    padding: 0 1rem;
   }
 
   .prose img {
-    max-width: 760px;
+    max-width: 100%;
+    margin: 1.5rem auto;
+  }
+
+  .prose h1 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .prose {
+    max-width: 720px !important;
+    --prose-font-size: 1rem;
+    padding: 0 2rem;
+    margin: 2rem auto !important;
+  }
+
+  .prose img {
+    max-width: 680px;
+    margin: 2rem auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .prose {
+    max-width: 840px !important;
+    --prose-font-size: 1.125rem;
+    padding: 0 2rem;
+    margin: 2rem auto !important;
+  }
+
+  .prose img {
+    max-width: 800px;
+    margin: 2.5rem auto;
+  }
+
+  .prose h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose h2 {
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose p {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 }
 
 .prose.text-sm {
-  --prose-font-size: 0.875rem;
+  --prose-font-size: 0.575rem;
 }
 
 .prose.text-base {
@@ -227,6 +347,21 @@
   padding-left: 1.1428571em;
 }
 
+@media (max-width: 480px) {
+  .prose pre {
+    font-size: 0.75em;
+    padding: 0.75rem 0.5rem;
+    margin: 1rem 0;
+    border-radius: 0.25rem;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .prose pre {
+    padding: 0.875rem 1rem;
+  }
+}
+
 .prose pre code {
   background-color: transparent;
   border-width: 0;
@@ -256,6 +391,16 @@
   margin-bottom: 2em;
   font-size: 0.875em;
   line-height: 1.7142857;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .prose table {
+    display: table;
+    white-space: normal;
+  }
 }
 
 .prose thead {
@@ -295,6 +440,29 @@
 
 .prose img {
   margin: 0.5em auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .prose img {
+    margin: 1rem 0;
+    border-radius: 0.375rem;
+  }
+}
+
+@media (min-width: 480px) {
+  .prose img {
+    margin: 1.5rem auto;
+    border-radius: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .prose img {
+    margin: 2rem auto;
+  }
 }
 
 .prose video {
