@@ -26,6 +26,9 @@ importers:
       astro:
         specifier: 5.13.3
         version: 5.13.3(@types/node@24.3.0)(jiti@2.5.1)(rollup@4.47.1)(tsx@4.20.4)(typescript@5.9.2)(yaml@2.8.1)
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
       mermaid:
         specifier: ^11.10.1
         version: 11.10.1
@@ -35,6 +38,9 @@ importers:
       playwright:
         specifier: ^1.55.0
         version: 1.55.0
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
       rehype-mermaid:
         specifier: ^3.0.0
         version: 3.0.0(playwright@1.55.0)
@@ -4047,6 +4053,9 @@ packages:
   readdirp@4.1.2:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
+
+  reading-time@1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
 
   recma-build-jsx@1.0.0:
     resolution: {integrity: sha512-8GtdyqaBcDfva+GUKDr3nev3VpKAhup1+RvkMvUxURHpW7QyIvk9F5wz7Vzo06CEMSilw6uArgRqhpiUcWp8ew==}
@@ -9739,6 +9748,8 @@ snapshots:
       picomatch: 2.3.1
 
   readdirp@4.1.2: {}
+
+  reading-time@1.5.0: {}
 
   recma-build-jsx@1.0.0:
     dependencies:

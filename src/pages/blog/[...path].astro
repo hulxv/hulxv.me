@@ -31,40 +31,49 @@ try {
 	console.warn(`Could not get modification time for ${filePath}:`, error);
 }
 
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter } = await post.render();
 ---
 
-<BaseLayout 
-	title={title} 
-	description={description} 
-	image={image} 
-	pageType="article"
-	publishDate={typeof date === 'string' ? new Date(date).toString() : date}
+<BaseLayout
+	title={title}
+	description={description}
+	image={image}
+	pageType='article'
+	publishDate={typeof date === "string" ? new Date(date).toString() : date}
 	modifiedDate={modifiedDate}
 	tags={tags}
 >
-	<article class="prose max-w-3xl mx-auto">
-		<header class="mb-8">
-			<h1 class="text-4xl font-bold mb-4">{title}</h1>
-			{description && <p class="text-lg text-gray-600 mb-4">{description}</p>}
-			<time class="text-sm text-gray-500" datetime={date}>{date}</time>
-		</header>
-		
-		{image && (
-			<div class="mb-8">
-				<img 
-					width="1200" 
-					height="630" 
-					src={image.src} 
-					alt={image.alt || title} 
-					class="w-full h-auto rounded-lg shadow-lg"
-				/>
+	<article class='prose mx-auto max-w-3xl'>
+		<header class='mb-8'>
+			<h1 class='mb-4 text-4xl font-bold'>{title}</h1>
+			{description && <p class='mb-4 text-lg text-gray-600'>{description}</p>}
+			<div class="mb-4 flex w-full justify-between">
+
+				<time class='text-sm text-gray-500' datetime={date}>{date}</time>
+				<div class='flex  gap-2 text-sm text-gray-500'>
+					<i class='i-ri-time-line'></i>
+					<span>{remarkPluginFrontmatter.minutesRead}</span>
+				</div>
 			</div>
-		)}
-		
-		<div class="prose lg:prose-xl">
+			
+		</header>
+
+		{
+			image && (
+				<div class='mb-8'>
+					<img
+						width='1200'
+						height='630'
+						src={image.src}
+						alt={image.alt || title}
+						class='h-auto w-full rounded-lg shadow-lg'
+					/>
+				</div>
+			)
+		}
+
+		<div class='prose lg:prose-xl'>
 			<Content />
 		</div>
 	</article>
 </BaseLayout>
-

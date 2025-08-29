@@ -4,6 +4,8 @@ import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
 import vue from "@astrojs/vue";
 import rehypeMermaid from "rehype-mermaid";
+import { remarkReadingTime } from './remark-reading-time';
+
 
 export default defineConfig({
 	site: "https://hulxv.me",
@@ -31,5 +33,6 @@ export default defineConfig({
 			excludeLangs: ["mermaid", "math"],
 		},
 		rehypePlugins: [[rehypeMermaid, { strategy: "img-svg", dark: true, theme: "forest" }]],
+		remarkPlugins: [remarkReadingTime],
 	},
 });
