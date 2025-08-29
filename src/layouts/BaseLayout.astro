@@ -10,20 +10,31 @@ const { ...head } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang='en' class='dark'>
 	<head>
 		<BaseHead {...head} />
 		<ViewTransitions />
 	</head>
-	<body class="bg-main text-main bg-dot flex min-h-screen w-full justify-center font-sans">
+	<body class='bg-main text-main bg-dot flex min-h-screen w-full justify-center font-sans'>
 		<Header client:load />
 		<main
-			class="pt-26 relative mx-auto max-w-3xl grow px-6 pb-16 sm:pt-36"
+			class='pt-26 relative mx-auto max-w-3xl grow px-6 pb-16 sm:pt-36'
 			transition:animate={fade({ duration: "0.4s" })}
 		>
 			<slot />
 			<ScrollToTop client:load />
 			<Footer />
 		</main>
+
+		<!-- 100% privacy-first analytics -->
+		<script data-collect-dnt='true' async src='https://scripts.simpleanalyticscdn.com/latest.js'
+		></script>
+		<noscript
+			><img
+				src='https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true'
+				alt=''
+				referrerpolicy='no-referrer-when-downgrade'
+			/></noscript
+		>
 	</body>
 </html>
