@@ -16,7 +16,7 @@
 }
 
 .desc {
-	font-size: smaller;
+	font-size: small;
 }
 
 @media (min-width: 640px) {

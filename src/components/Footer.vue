@@ -5,7 +5,7 @@ import { getLinkTarget } from "@/utils/link";
 
 <template>
 	<footer
-		class="mt-18 border-main !border-op-50 text-dark flex w-full max-w-3xl flex-col gap-4 border-t pb-8 pt-6 text-sm dark:text-white"
+		class="mt-18 border-main !border-op-50 text-dark flex w-full max-w-3xl flex-col gap-4 border-t pb-8 pt-6 md:text-xs text-sm dark:text-white"
 	>
 		<div
 			v-if="siteConfig.footer.navLinks && siteConfig.footer.navLinks.length > 0"
