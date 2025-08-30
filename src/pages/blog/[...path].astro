@@ -77,7 +77,7 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 		<footer class='mt-12 border-t pt-8'>
 			<div class='mb-8'>
 				<h3 class='mb-4 text-base font-semibold'>Share this article</h3>
-				<div class='flex gap-3 text-sm'>
+				<div class='flex gap-3 text-sm sm:text-xs flex-wrap'>
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.toString())}`}
 						target='_blank'
