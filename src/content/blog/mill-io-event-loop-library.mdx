@@ -93,10 +93,10 @@ for (int i = 0; i < num_events; i++) {
 
 # Other Solutions
 
-Event loops aren't the only way to handle concurrency, especially for I/O-bound tasks. There are many approaches to solve our problem:
+Event loops aren't the only way to handle concurrency, especially for I/O-bound tasks. There are many approaches to solve our problem with a small brief overview of each and you can get started reading about them in details by Googling them or use LLMs as you want:
 
 - **Multithreading**: Using multiple threads, where each thread handles a separate task. This is the traditional approach to concurrency, which we discussed before. It has some problems but is still a good solution.
-- **Multiprocessing**: Using multiple processes, each with its own memory space, to handle different tasks. This is a robust solution that provides better isolation.
+- **Multiprocessing**: Using multiple processes, each with its own memory space, to handle different tasks.
 - **Asynchronous I/O with Callbacks**: This is the model the event loop uses, but without the central loop. Instead, each I/O request is made with a callback function that is invoked when the operation completes.
 - **Asynchronous I/O with Coroutines/Generators**: This is a more modern approach that uses language features to make asynchronous code look like synchronous code, making it easier to read and write.
 
