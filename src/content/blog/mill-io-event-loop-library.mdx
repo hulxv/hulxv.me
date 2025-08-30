@@ -289,19 +289,27 @@ sequenceDiagram
 ```
 
 
+# Conclusion
 
+We started with a simple problem: handling millions of users on a web server without overwhelming the system. The traditional thread-per-connection approach creates too much overhead, while single-threaded processing can't handle the load. 
+
+Event loops solve this by using non-blocking I/O and efficient polling. Instead of blocking threads or creating thousands of them, we use one thread to monitor many connections and only act when something is actually ready.
+
+At the end, the important thing that we should learn is that the best solutions come from the simple ones.
 
 # Acknowledgments
 
-This project was developed as part of the **Summer of Bitcoin 2025** program. Special thanks to:
-
+This project was developed as part of the **Summer of Bitcoin 2025** program. thanks to:
 - [Citadel-tech](https://github.com/citadel-tech) and the [Coinswap](https://github.com/citadel-tech/coinswap) project for providing the use case and requirements.
 - [**Summer of Bitcoin**](https://summerofbitcoin.org) organizers and mentors for their guidance.
 - The **mio** project for providing the foundational polling abstractions.
 
+Special Thanks to my mentor, [@Shourya742](https://github.com/Shourya742), for his kindness and for helping me a lot while working on this project.
+
 # Helpful Resources
 
-- [Mill-io](https://github.com/citadel-tech/Event-loop)
+- [Mill-IO Project](https://github.com/citadel-tech/Event-loop)
+- [Explain Event Loop - By Matheus C. França](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)
 - [Event Loop Programming: A Different Way of Thinking](https://linuxjedi.co.uk/event-loop-programming-a-different-way-of-thinking)
 - [Event Loop mechanism and how it works](https://raypvn.medium.com/event-loop-mechanism-and-how-it-works-b038279778c4)
 - [JavaScript execution model - MDN - Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model)
