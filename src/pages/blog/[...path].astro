@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { statSync } from "fs";
 import { join } from "path";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Comments from "@/components/Comments.astro";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -74,15 +75,19 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 			<Content />
 		</div>
 
+		<div>
+			<Comments />
+		</div>
+
 		<footer class='mt-12 border-t pt-8'>
 			<div class='mb-8'>
 				<h3 class='mb-4 text-base font-semibold'>Share this article</h3>
-				<div class='flex gap-3 text-sm sm:text-xs flex-wrap'>
+				<div class='flex flex-wrap gap-3 text-sm sm:text-xs'>
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.toString())}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						class='flex items-center gap-2 rounded bg-black-500 px-4 py-2 text-white transition-colors hover:bg-black-600'
+						class='bg-black-500 hover:bg-black-600 flex items-center gap-2 rounded px-4 py-2 text-white transition-colors'
 						aria-label='Share on Twitter'
 					>
 						<i class='i-ri-twitter-x-line'></i>
