@@ -25,10 +25,10 @@ html:not(.dark) {
 	background-position: center center;
 	background-size: 20px 20px;
 	mask-image: linear-gradient(0deg, transparent 5%, var(--dot-mask-color));
-	animation: dotAnimation 30s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	will-change: transform, opacity, background-position;
+	/* animation: dotAnimation 30s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	will-change: transform, opacity, background-position; */
 }
-
+/* 
 @keyframes dotAnimation {
 	0% {
 		background-position: 0 0;
@@ -75,4 +75,4 @@ html:not(.dark) {
 		opacity: 0.4;
 		transform: scale(1) rotate(0deg);
 	}
-}
+} */
