@@ -10,17 +10,17 @@ image:
   }
 ---
 
-# Introduction
+## Introduction
 
 Have you ever wondered how large-scale systems work internally? It's a really important question. In engineering, there are a lot of techniques that are used to solve various problems. All of those have pros and cons; there is no **_perfect solution_**. Your job is to find the best solution for your case, one that has the pros that solve your problem and the fewest cons that you can bear. One of the critical problems is building a huge multi-user system. Throughout this article, we will discuss our problem and how we can solve it with our library, [mill-io](https://github.com/citadel-tech/Event-loop), an event-loop library I worked on during my Summer of Bitcoin internship to be used inside [Coinswap](https://github.com/citadel-tech/coinswap).
 
-# Our Problem
+## Our Problem
 
-Imagine we have a simple system, a web server. It's really simple; single-threaded and handles requests by reading/writing to the socket one by one. There's nothing special about it. If you have 1–10 users, maybe you wouldn't face any problems and you wouldn't need to implement any complex solution, but imagine those users become 1 million. Your website becomes a hell for your users due to single-threaded processing.
+Imagine we have a simple system, a web server. It's really simple; single-threaded and handles requests by reading/writing to the socket one by one. There's nothing special about it. If you have 1-10 users, maybe you wouldn't face any problems and you wouldn't need to implement any complex solution, but imagine those users become 1 million. Your website becomes a hell for your users due to single-threaded processing.
 
 There's a simple solution for this problem: the `thread-per-connection` approach. Basically, we process each connection inside an individual thread concurrently to enhance performance and decrease the latency of each request. But still, we have performance issues. The OS manages thread execution with a scheduler. A thread has different states, and when it's blocked, the OS stores its context—such as CPU registers (general-purpose registers, stack pointer, and program counter), its stack, and scheduling information—inside the memory. Before it runs again, the CPU loads the thread's state from memory and stores the previous state in memory, as before. This operation is called **Context Switching**. Unfortunately, this operation takes time and have a high memory consumption per thread, and the more threads you have, the worse the performance. We have another struggle now!
 
-# How to Solve This Problem?
+## How to Solve This Problem?
 
 To solve any problem, you'll have an initial solution. This solution solves your problem but not in the best way. We find the best solution by optimizing this basic solution. So let's optimize our solution!
 
@@ -28,7 +28,7 @@ The main problem we face is I/O-blocked operations, like reading/writing files. 
 
 You don't need to worry about that. The OS provides some syscalls that you can use to find the best solution. What we need is to know when files (or sockets in our web-server example) are ready for reading or writing. There are some system calls that notify us when a specific event occurs (like data being available to read) so we can run a piece of code. After that, we need to limit the number of threads to reduce the context-switching operations that appear in the `thread-per-connection` approach. Now, we can say we have a good solution!
 
-# So, What's the Event Loop?
+## So, What's the Event Loop?
 
 Now that we understand the problem and know we need a better solution, let's explore what an event loop actually is and how it solves our scalability issues.
 
@@ -37,7 +37,7 @@ The event loop is a programming construct that's designed specifically to handle
 Think of it like instead of having a waiter (thread) stand by each table (connection) waiting for customers to finish reading the menu, you have one smart coordinator who watches all tables at once and only sends a waiter when a customer is actually ready to order. This is exactly what Node.js uses to handle thousands of concurrent connections with just one thread. Libraries like [libevent](https://libevent.org/) and [libuv](https://libuv.org/) implement this pattern and power many high-performance systems.
 
 
-# Internals of Polling
+## Internals of Polling
 
 You might wonder: "How does the event loop actually know when I/O is ready?" The answer lies in **polling**, a key technique that makes all of this possible.
 
@@ -91,7 +91,7 @@ for (int i = 0; i < num_events; i++) {
 
 
 
-# Other Solutions
+## Other Solutions
 
 Event loops aren't the only way to handle concurrency, especially for I/O-bound tasks. There are many approaches to solve our problem with a small brief overview of each and you can get started reading about them in details by Googling them or use LLMs as you want:
 
@@ -101,11 +101,11 @@ Event loops aren't the only way to handle concurrency, especially for I/O-bound 
 - **Asynchronous I/O with Coroutines/Generators**: This is a more modern approach that uses language features to make asynchronous code look like synchronous code, making it easier to read and write.
 
 
-# How mill-io Works and Why It Exists?
+## How mill-io Works and Why It Exists?
 
 This project was built during my [Summer of Bitcoin](https://www.summerofbitcoin.org/) internship (I will write an article about it soon) for the [Citadel-tech](https://github.com/citadel-tech) organization to be used inside the [Coinswap project](https://github.com/citadel-tech/coinswap) to enhance its performance through better I/O operation management without relying on heavyweight async runtimes such as [tokio-rs](https://tokio.rs/) and [async-std](https://github.com/async-rs/async-std). The implementation leverages **mio**'s polling capabilities to create a [reactor-based architecture](https://en.wikipedia.org/wiki/Reactor_pattern) with a configurable thread pool, ensuring **Coinswap**'s core logic remains runtime-agnostic while achieving optimal performance and resource utilization.
 
-# Mill-IO Architecture 
+## Mill-IO Architecture 
 
 Let's break down how mill-io works behind the scenes. The event loop is made up of a few simple building blocks that work together to handle lots of connections efficiently. Here's a quick overview:
 
@@ -142,7 +142,7 @@ graph TB
     end
 ```
 
-## 1. PollHandle – Listening for Events
+### 1. PollHandle - Listening for Events
 
 PollHandle is like a receptionist who keeps an eye on all your sockets and files. It uses the mio library to ask the OS, "Let me know when something interesting happens!" When an event is ready, PollHandle knows which handler to call.
 
@@ -163,7 +163,7 @@ poller
     .expect("Failed to register src");
 ```
 
-## 2. ThreadPool – The Workers
+### 2. ThreadPool - The Workers
 
 Once an event is ready, we need someone to do the work. That's where the thread pool comes in. Instead of creating a new thread for every task (which is slow and uses lots of memory), we keep a small team of worker threads ready to go. When a job comes in, one of them grabs it and gets to work.
 
@@ -181,7 +181,7 @@ for _ in 0..10 {
 }
 ```
 
-## 3. Reactor – The Boss
+### 3. Reactor - The Boss
 
 The Reactor is the coordinator. It listens for events using PollHandle and then tells the thread pool to run the right handler. It's like a dispatcher making sure every event gets handled quickly and efficiently.
 
@@ -201,7 +201,7 @@ flowchart LR
     E --> F[Graceful Stop]
 ```
 
-## 4. EventLoop – The Simple Interface
+### 4. EventLoop - The Simple Interface
 
 You don't need to worry about all the technical details. The EventLoop gives you an easy way to register events, start the loop, and shut things down when you're done. It manages the Reactor and keeps everything running in the background.
 
@@ -246,7 +246,7 @@ sequenceDiagram
 ```
 
 
-# Conclusion
+## Conclusion
 
 We started with a simple problem: handling millions of users on a web server without overwhelming the system. The traditional thread-per-connection approach creates too much overhead, while single-threaded processing can't handle the load. 
 
@@ -254,7 +254,7 @@ Event loops solve this by using non-blocking I/O and efficient polling. Instead 
 
 At the end, the important thing that we should learn is that the best solutions come from the simple ones.
 
-# Acknowledgments
+## Acknowledgments
 
 This project was developed as part of the **Summer of Bitcoin 2025** program. thanks to:
 - [Citadel-tech](https://github.com/citadel-tech) and the [Coinswap](https://github.com/citadel-tech/coinswap) project for providing the use case and requirements.
@@ -263,7 +263,7 @@ This project was developed as part of the **Summer of Bitcoin 2025** program. th
 
 Special Thanks to my mentor, [@Shourya742](https://github.com/Shourya742), for his kindness and for helping me a lot while working on this project.
 
-# Helpful Resources
+## Helpful Resources
 
 - [Mill-IO Project](https://github.com/citadel-tech/Event-loop)
 - [Explain Event Loop - By Matheus C. França](https://gist.github.com/kassane/f2330ef44b070f4a5fa9d59c770f68e9)

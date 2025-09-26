@@ -46,7 +46,7 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 >
 	<article class='prose mx-auto max-w-3xl'>
 		<header class='mb-8'>
-			<h1 class='mb-4 text-4xl font-bold'>{title}</h1>
+			<h1 class='mb-4 font-bold'>{title}</h1>
 			{description && <p class='mb-4 text-lg text-gray-600'>{description}</p>}
 			<div class='mb-4 flex w-full justify-between'>
 				<time class='text-sm text-gray-500' datetime={date}>{date}</time>
@@ -71,7 +71,15 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 			)
 		}
 
-		<div class='prose lg:prose-xl'>
+		<div id="table-of-contents" class='mb-8 rounded-lg border px-6 py-2' style="display: none;">
+			<h2 class='mb-4 text-lg font-semibold'>Table of Contents</h2>
+			<nav class='toc'>
+				<ul id="toc-list" class='space-y-2'>
+				</ul>
+			</nav>
+		</div>
+
+		<div class='content prose lg:prose-xl'>
 			<Content />
 		</div>
 
@@ -125,4 +133,46 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 			</div>
 		</footer>
 	</article>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const content = document.querySelector('.content');
+			const toc = document.getElementById('table-of-contents');
+			const tocList = document.getElementById('toc-list');
+			
+			if (!content || !toc || !tocList) return;
+			
+			const headings = content.querySelectorAll('h2, h3, h4, h5, h6');
+			
+			if (headings.length === 0) return;
+			
+			// Show the TOC
+			toc.style.display = 'block';
+			
+			headings.forEach((heading, index) => {
+				// Create an ID if it doesn't have one
+				if (!heading.id) {
+					heading.id = heading.textContent
+						?.toLowerCase()
+						.replace(/[^a-z0-9]+/g, '-')
+						.replace(/(^-|-$)/g, '') || `heading-${index}`;
+				}
+				
+				const li = document.createElement('li');
+				const level = parseInt(heading.tagName.substring(1));
+				const indentPx = level > 2 ? (level - 2) * 16 : 0;
+				
+				li.className = `toc-level-${level}`;
+				li.style.marginLeft = `${indentPx}px`;
+				
+				const a = document.createElement('a');
+				a.href = `#${heading.id}`;
+				a.textContent = heading.textContent;
+				a.className = 'text-blue-600 hover:text-blue-800 hover:underline';
+				
+				li.appendChild(a);
+				tocList.appendChild(li);
+			});
+		});
+	</script>
 </BaseLayout>
